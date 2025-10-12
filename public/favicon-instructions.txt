@@ -1,0 +1,10 @@
+# This would be a 32x32 PNG favicon, but since I can only create text files,
+# I'll provide instructions for creating one from the SVG
+
+# To create a PNG favicon from our SVG:
+# 1. Open codecollab-logo.svg in any vector graphics program
+# 2. Export as PNG at 32x32 pixels
+# 3. Save as favicon-32x32.png
+# 4. Also create 16x16 version as favicon-16x16.png
+
+# For now, the SVG favicon should work in modern browsers

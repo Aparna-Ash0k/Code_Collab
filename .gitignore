@@ -1,0 +1,128 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.pnp
+.pnp.js
+
+# Environment Variables & API Keys
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.*.local
+
+# Firebase Admin SDK & Service Account Keys
+*firebase-adminsdk*.json
+dev-server/codecollab-v2-firebase-adminsdk.json
+codecollab-v2-firebase-adminsdk.json
+
+# API Configuration Files with Keys
+src/config/emailjs.ts
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-workspace
+*.sublime-project
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Testing
+coverage/
+*.lcov
+.nyc_output
+.grunt
+lib-cov
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Local dev files
+*.local
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache
+.parcel-cache
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Secrets and credentials
+*secret*
+*credential*
+*key.json
+*.pem
+*.key
+*.cert
+*.crt

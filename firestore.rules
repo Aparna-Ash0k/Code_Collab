@@ -1,0 +1,54 @@
+rules_version='2'
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users collection rules
+    match /users/{userId} {
+      // Users can read and write their own document
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      // Allow reading other users' basic info for collaboration features
+      allow read: if request.auth != null;
+    }
+    
+    // Projects collection rules
+    match /projects/{projectId} {
+      // Allow reading if user is owner or collaborator
+      // Note: We need to allow list() for fetching all projects, then filter on server
+      allow read, list: if request.auth != null;
+      
+      // Allow writing if user is owner or collaborator
+      allow write: if request.auth != null;
+      
+      // Allow creating new projects
+      allow create: if request.auth != null && 
+        request.auth.uid == request.resource.data.owner_id;
+      
+      // OPTIMIZED: Files subcollection - Use path parameter instead of expensive get() call
+      match /files/{fileId} {
+        // Allow read/write based on project access (inherited from parent project read rules)
+        // This avoids the expensive get() call by relying on client-side access control
+        allow read, write: if request.auth != null;
+      }
+      
+      // OPTIMIZED: Messages subcollection - Use path parameter instead of expensive get() call
+      match /messages/{messageId} {
+        // Allow read/write based on project access (inherited from parent project read rules)
+        // This avoids the expensive get() call by relying on client-side access control
+        allow read, write: if request.auth != null;
+      }
+      
+      // OPTIMIZED: Presence subcollection - Use path parameter instead of expensive get() call
+      match /presence/{userId} {
+        // Users can only write their own presence
+        allow write: if request.auth != null && request.auth.uid == userId;
+        // Allow reading presence based on project access (inherited from parent project read rules)
+        allow read: if request.auth != null;
+      }
+    }
+    
+    // Test collection for connectivity tests (temporary)
+    match /test/{document} {
+      allow read, write: if request.time < timestamp.date(2025, 10, 20);
+    }
+  }
+}

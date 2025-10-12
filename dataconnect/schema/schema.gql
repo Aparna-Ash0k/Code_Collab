@@ -1,0 +1,49 @@
+type User @table {
+  uid: String! @col(name: "id")
+  email: String!
+  displayName: String
+  avatarUrl: String
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+}
+
+type Project @table {
+  name: String!
+  description: String
+  ownerId: String!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  collaborators: [String!]!
+}
+
+type File @table {
+  projectId: String!
+  name: String!
+  path: String!
+  content: String!
+  type: String!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  createdBy: String!
+  language: String
+  version: Int!
+}
+
+type Message @table {
+  projectId: String!
+  userId: String!
+  content: String!
+  createdAt: Timestamp!
+  userName: String!
+  userAvatar: String
+}
+
+type Presence @table {
+  projectId: String!
+  userId: String!
+  userName: String!
+  userAvatar: String
+  file: String
+  cursor: String
+  lastSeen: Timestamp!
+}

@@ -1,0 +1,82 @@
+mutation SeedData @auth(level: USER) {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      username: "bobuser",
+      email: "bob@example.com",
+      createdAt: "2024-04-29T12:00:00Z"
+    },
+    {
+      id: "661f9511-f3ac-52e5-b827-557766551111",
+      username: "aliceuser",
+      email: "alice@example.com",
+      createdAt: "2024-04-29T13:00:00Z"
+    }
+  ])
+  workspace_insertMany(data: [
+    {
+      id: "772ga622-04bd-63f6-c938-668877662222",
+      name: "Bob's Workspace",
+      ownerId: "550e8400-e29b-41d4-a716-446655440000",
+      createdAt: "2024-04-29T14:00:00Z",
+      isPublic: true
+    },
+    {
+      id: "883hb733-15ce-74g7-da49-779988773333",
+      name: "Alice's Private Space",
+      ownerId: "661f9511-f3ac-52e5-b827-557766551111",
+      createdAt: "2024-04-29T15:00:00Z",
+      isPublic: false
+    }
+  ])
+  folder_insertMany(data: [
+    {
+      id: "994ic844-26df-85h8-eb5a-88aac9884444",
+      name: "Project Docs",
+      workspaceId: "772ga622-04bd-63f6-c938-668877662222",
+      path: "/docs",
+      createdAt: "2024-04-29T16:00:00Z"
+    },
+    {
+      id: "005jd955-37eg-96i9-fc6b-99bbda995555",
+      name: "Secret Plans",
+      workspaceId: "883hb733-15ce-74g7-da49-779988773333",
+      path: "/private",
+      createdAt: "2024-04-29T17:00:00Z"
+    }
+  ])
+  file_insertMany(data: [
+    {
+      id: "116ke066-48gh-07j0-gd7c-00cce1006666",
+      name: "Important Notes",
+      workspaceId: "772ga622-04bd-63f6-c938-668877662222",
+      path: "/docs/notes.txt",
+      content: "Remember to back up everything!",
+      createdAt: "2024-04-29T18:00:00Z",
+      updatedAt: "2024-04-29T18:00:00Z"
+    },
+    {
+      id: "227lf177-59hi-18k1-he8d-11dde2117777",
+      name: "Top Secret",
+      workspaceId: "883hb733-15ce-74g7-da49-779988773333",
+      path: "/private/secret.txt",
+      content: "Do not share this with anyone!",
+      createdAt: "2024-04-29T19:00:00Z",
+      updatedAt: "2024-04-29T19:00:00Z"
+    }
+  ])
+  collaboration_insertMany(data: [
+    {
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      workspaceId: "883hb733-15ce-74g7-da49-779988773333",
+      accessLevel: "admin",
+      joinedAt: "2024-04-29T20:00:00Z"
+    },
+    {
+      userId: "661f9511-f3ac-52e5-b827-557766551111",
+      workspaceId: "772ga622-04bd-63f6-c938-668877662222",
+      accessLevel: "member",
+      joinedAt: "2024-04-29T21:00:00Z"
+    }
+  ])
+}

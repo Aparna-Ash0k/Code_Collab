@@ -1,0 +1,84 @@
+mutation CreateUser($uid: String!, $email: String!, $displayName: String) @auth(level: USER) {
+  user_insert(data: {
+    uid: $uid,
+    email: $email,
+    displayName: $displayName,
+    createdAt_expr: "request.time",
+    updatedAt_expr: "request.time"
+  })
+}
+
+mutation UpdateUser($uid: String!, $displayName: String, $avatarUrl: String) @auth(level: USER) {
+  user_update(
+    key: { uid: $uid },
+    data: {
+      displayName: $displayName,
+      avatarUrl: $avatarUrl,
+      updatedAt_expr: "request.time"
+    }
+  )
+}
+
+query GetUser($uid: String!) @auth(level: USER) {
+  user(key: { uid: $uid }) {
+    uid
+    email
+    displayName
+    avatarUrl
+    createdAt
+    updatedAt
+  }
+}
+
+query GetUserProjects($ownerId: String!) @auth(level: USER) {
+  projects(where: { ownerId: { eq: $ownerId } }) {
+    id
+    name
+    description
+    ownerId
+    createdAt
+    updatedAt
+    collaborators
+  }
+}
+
+mutation CreateProject($name: String!, $description: String, $ownerId: String!) @auth(level: USER) {
+  project_insert(data: {
+    name: $name,
+    description: $description,
+    ownerId: $ownerId,
+    collaborators: [$ownerId],
+    createdAt_expr: "request.time",
+    updatedAt_expr: "request.time"
+  })
+}
+
+mutation CreateFile($projectId: String!, $name: String!, $path: String!, $content: String!, $type: String!, $createdBy: String!, $language: String) @auth(level: USER) {
+  file_insert(data: {
+    projectId: $projectId,
+    name: $name,
+    path: $path,
+    content: $content,
+    type: $type,
+    createdBy: $createdBy,
+    language: $language,
+    version: 1,
+    createdAt_expr: "request.time",
+    updatedAt_expr: "request.time"
+  })
+}
+
+query GetProjectFiles($projectId: String!) @auth(level: USER) {
+  files(where: { projectId: { eq: $projectId } }) {
+    id
+    name
+    path
+    content
+    type
+    language
+    version
+    createdAt
+    updatedAt
+    createdBy
+  }
+}
