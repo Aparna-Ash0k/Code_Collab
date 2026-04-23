@@ -1,0 +1,87 @@
+.project-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 10px;
+  background: var(--vscode-titleBar-inactiveBackground);
+  border-bottom: 1px solid var(--vscode-panel-border);
+  min-height: 32px;
+  gap: 8px;
+}
+
+.project-top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.project-selector-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--vscode-button-secondaryBackground, #3c3c3c);
+  border: 1px solid var(--vscode-button-border, #3e3e42);
+  border-radius: 4px;
+  color: var(--vscode-button-secondaryForeground, #cccccc);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+  min-width: 140px;
+  justify-content: space-between;
+}
+
+.project-selector-trigger:hover {
+  background: var(--vscode-button-secondaryHoverBackground, #404040);
+}
+
+.project-selector-trigger .project-icon {
+  color: var(--vscode-symbolIcon-folderForeground, #dcb67a);
+}
+
+.project-selector-trigger .project-name {
+  flex: 1;
+  text-align: left;
+  truncate: true;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-selector-trigger .dropdown-arrow {
+  color: var(--vscode-foreground, #cccccc);
+  opacity: 0.7;
+}
+
+.project-top-bar-center {
+  flex: 1;
+  min-width: 0; /* Allow flex child to shrink below content size */
+}
+
+.project-top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .project-top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 6px;
+    gap: 6px;
+  }
+  
+  .project-top-bar-left,
+  .project-top-bar-center,
+  .project-top-bar-right {
+    width: 100%;
+  }
+  
+  .project-top-bar-center {
+    order: 3;
+  }
+}

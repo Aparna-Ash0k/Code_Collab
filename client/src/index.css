@@ -1,0 +1,460 @@
+/* Import TailwindCSS via CDN temporarily */
+@import url('https://cdn.tailwindcss.com');
+
+/* Import UI Fixes CSS - This should come after other theme imports */
+@import './styles/ui-fixes.css';
+
+/* Import VS Code Theme System */
+@import './styles/vscode-theme.css';
+
+/* Legacy VS Code color variables for compatibility */
+:root {
+  --vscode-bg: var(--bg-primary);
+  --vscode-sidebar: var(--surface-secondary);
+  --vscode-editor: var(--bg-primary);
+  --vscode-panel: var(--surface-primary);
+  --vscode-border: var(--border-primary);
+  --vscode-text: var(--text-primary);
+  --vscode-text-muted: var(--text-secondary);
+  --vscode-text-secondary: var(--text-tertiary);
+  --vscode-accent: var(--text-accent);
+  --vscode-accent-hover: var(--text-accent-hover);
+  --vscode-tab-active: var(--surface-primary);
+  --vscode-tab-inactive: var(--surface-secondary);
+  --vscode-hover: var(--hover-primary);
+  --vscode-focus: var(--border-focus);
+  --vscode-success: var(--text-success);
+  --vscode-warning: var(--text-warning);
+  --vscode-error: var(--text-error);
+}
+
+/* Core utility classes with !important to override any conflicts */
+.bg-vscode-bg { background-color: var(--vscode-bg) !important; }
+.bg-vscode-sidebar { background-color: var(--vscode-sidebar) !important; }
+.bg-vscode-editor { background-color: var(--vscode-editor) !important; }
+.bg-vscode-panel { background-color: var(--vscode-panel) !important; }
+.bg-vscode-border { background-color: var(--vscode-border) !important; }
+.bg-vscode-accent { background-color: var(--vscode-accent) !important; }
+.bg-vscode-tab-active { background-color: var(--vscode-tab-active) !important; }
+.bg-vscode-tab-inactive { background-color: var(--vscode-tab-inactive) !important; }
+.bg-vscode-hover { background-color: var(--vscode-hover) !important; }
+
+.text-vscode-text { color: var(--vscode-text) !important; }
+.text-vscode-text-muted { color: var(--vscode-text-muted) !important; }
+.text-vscode-text-secondary { color: var(--vscode-text-secondary) !important; }
+.text-vscode-accent { color: var(--vscode-accent) !important; }
+.text-vscode-success { color: var(--vscode-success) !important; }
+.text-vscode-warning { color: var(--vscode-warning) !important; }
+.text-vscode-error { color: var(--vscode-error) !important; }
+
+.border-vscode-border { border-color: var(--vscode-border) !important; }
+.border-vscode-accent { border-color: var(--vscode-accent) !important; }
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--vscode-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #424242;
+  border: 3px solid var(--vscode-bg);
+  border-radius: 7px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--vscode-bg);
+}
+
+/* Focus states */
+.focus-ring:focus {
+  outline: 1px solid var(--vscode-accent);
+  outline-offset: -1px;
+}
+
+/* Transition utilities */
+.transition-all {
+  transition: all 0.15s ease;
+}
+
+/* Additional VS Code-like enhancements */
+button {
+  transition: all 0.15s ease;
+}
+
+button:hover {
+  transform: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  box-shadow: 0 0 0 1px var(--vscode-accent);
+}
+
+/* Monaco Editor container improvements */
+.monaco-editor {
+  background-color: var(--vscode-editor) !important;
+}
+
+.monaco-editor .view-lines {
+  background-color: var(--vscode-editor) !important;
+}
+
+.monaco-editor-container {
+  height: 100% !important;
+  width: 100% !important;
+  background-color: #1e1e1e !important;
+  position: relative !important;
+}
+
+.monaco-editor .monaco-editor-background {
+  background-color: #1e1e1e !important;
+}
+
+.monaco-editor .margin {
+  background-color: #1e1e1e !important;
+}
+
+/* Ensure Monaco editor is interactive */
+.monaco-editor textarea {
+  background: transparent !important;
+  color: #cccccc !important;
+}
+
+.monaco-editor .view-line {
+  color: #cccccc !important;
+}
+
+/* Ensure editor is interactive and clickable */
+.editor-area .monaco-editor {
+  pointer-events: all !important;
+  user-select: text !important;
+}
+
+.editor-area .monaco-editor textarea {
+  pointer-events: all !important;
+  user-select: text !important;
+  cursor: text !important;
+}
+
+.editor-area .monaco-editor .view-lines {
+  pointer-events: all !important;
+  user-select: text !important;
+  cursor: text !important;
+}
+
+/* Remove any potential overlay issues */
+.editor-area {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.editor-area > div {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Ensure editor area gets focus */
+.editor-area:focus-within {
+  outline: none !important;
+}
+
+/* Fix any potential layout issues */
+.monaco-editor .overflow-guard {
+  position: relative !important;
+}
+
+.monaco-editor .monaco-scrollable-element {
+  position: relative !important;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-in;
+}
+
+/* Better text selection */
+::selection {
+  background-color: var(--vscode-accent);
+  color: white;
+}
+
+/* Hide default scrollbars on smaller elements */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 4px;
+  border: 1px solid var(--vscode-bg);
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Force VS Code styling */
+#root {
+  background-color: #1e1e1e !important;
+  color: #cccccc !important;
+  height: 100vh !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+}
+
+/* Ensure main app container styles */
+.app-container {
+  background-color: #1e1e1e !important;
+  color: #cccccc !important;
+  height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Top Bar Styles */
+.top-bar {
+  background-color: #2d2d30 !important;
+  border-bottom: 1px solid #3e3e42 !important;
+  height: 40px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Activity Bar Styles */
+.activity-bar {
+  width: 48px !important;
+  background-color: #252526 !important;
+  border-right: 1px solid #3e3e42 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.activity-bar-icon {
+  width: 48px !important;
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  color: #969696 !important;
+  transition: all 0.15s ease !important;
+  position: relative !important;
+  group: true;
+}
+
+.activity-bar-icon:hover {
+  background-color: #2a2d2e !important;
+  color: #cccccc !important;
+}
+
+.activity-bar-icon.active {
+  border-left: 2px solid #007acc !important;
+  background-color: #2a2d2e !important;
+  color: white !important;
+}
+
+.activity-bar-icon .tooltip {
+  position: absolute !important;
+  left: 100% !important;
+  margin-left: 8px !important;
+  padding: 4px 8px !important;
+  background-color: #2d2d30 !important;
+  border: 1px solid #3e3e42 !important;
+  color: white !important;
+  font-size: 11px !important;
+  border-radius: 3px !important;
+  opacity: 0 !important;
+  transition: opacity 0.15s ease !important;
+  white-space: nowrap !important;
+  z-index: 50 !important;
+  pointer-events: none !important;
+}
+
+.activity-bar-icon:hover .tooltip {
+  opacity: 1 !important;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 320px !important;
+  background-color: #2d2d30 !important;
+  border-right: 1px solid #3e3e42 !important;
+}
+
+/* Explorer Styles */
+.explorer-header {
+  padding: 12px !important;
+  border-bottom: 1px solid #3e3e42 !important;
+  background-color: #2d2d30 !important;
+}
+
+.explorer-title {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #cccccc !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* File Tree Styles */
+.file-tree-item {
+  display: flex !important;
+  align-items: center !important;
+  padding: 4px 8px !important;
+  cursor: pointer !important;
+  color: #cccccc !important;
+  font-size: 14px !important;
+  transition: background-color 0.15s ease !important;
+}
+
+/* Ensure file tree items stack vertically with proper container */
+.file-tree-item-container {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.file-tree-item:hover {
+  background-color: #2a2d2e !important;
+  color: white !important;
+}
+
+.file-tree-item .file-tree-icon {
+  flex-shrink: 0 !important;
+}
+
+.file-tree-icon {
+  margin-right: 8px !important;
+  color: #007acc !important;
+}
+
+/* File Explorer Create Menu */
+.file-tree-item {
+  position: relative;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: background-color 0.15s ease;
+}
+
+.file-tree-item:hover {
+  background-color: var(--vscode-list-hoverBackground) !important;
+}
+
+.file-tree-item.active {
+  background-color: var(--vscode-list-activeSelectionBackground) !important;
+}
+
+.file-tree-icon {
+  margin-right: 6px;
+  color: var(--vscode-icon-foreground);
+}
+
+/* Create file/folder input styling */
+.file-tree-item input[type="text"] {
+  background: var(--vscode-input-background) !important;
+  border: 1px solid var(--vscode-focusBorder) !important;
+  color: var(--vscode-input-foreground) !important;
+  font-size: 12px !important;
+  padding: 2px 6px !important;
+  border-radius: 2px !important;
+  outline: none !important;
+  font-family: inherit !important;
+}
+
+.file-tree-item input[type="text"]:focus {
+  border-color: var(--vscode-focusBorder) !important;
+  box-shadow: 0 0 0 1px var(--vscode-focusBorder) !important;
+}
+
+/* Plus button for creating files */
+.create-file-btn {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  background: transparent;
+  border: none;
+  padding: 2px;
+  border-radius: 2px;
+  color: var(--vscode-icon-foreground);
+  cursor: pointer;
+}
+
+.file-tree-item:hover .create-file-btn {
+  opacity: 1;
+}
+
+.create-file-btn:hover {
+  background-color: var(--vscode-toolbar-hoverBackground);
+  color: var(--vscode-icon-foreground);
+}
+
+/* Context menu styling */
+.create-context-menu {
+  background: var(--vscode-menu-background) !important;
+  border: 1px solid var(--vscode-menu-border) !important;
+  border-radius: 3px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  z-index: 1000 !important;
+  min-width: 120px !important;
+}
+
+.create-context-menu button {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  padding: 6px 12px !important;
+  background: transparent !important;
+  border: none !important;
+  color: var(--vscode-menu-foreground) !important;
+  font-size: 12px !important;
+  cursor: pointer !important;
+  text-align: left !important;
+}
+
+.create-context-menu button:hover {
+  background-color: var(--vscode-menu-selectionBackground) !important;
+  color: var(--vscode-menu-selectionForeground) !important;
+}
+
+/* Loading state */
+.explorer-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--vscode-descriptionForeground);
+  font-size: 12px;
+}
+
+/* Fix for potential layout issues */
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+.flex-1 {
+  flex: 1 !important;
+}
+
+.flex-col {
+  flex-direction: column !important;
+}
+
+.flex {
+  display: flex !important;
+}

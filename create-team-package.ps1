@@ -1,21 +1,21 @@
-# Script to create a complete team package excluding only build artifacts and dependencies
+# Script to create a complete team package including ALL necessary files
+# This includes .gitignore, .env files, Firebase admin SDK, and all source code
 
-$sourceDir = "d:\v2"
+$sourceDir = "d:\c1"
 $timestamp = Get-Date -Format 'yyyyMMdd_HHmmss'
 $zipName = "codecollab_v2_complete_$timestamp.zip"
 $zipPath = Join-Path $sourceDir $zipName
 
-# Folders to exclude
+# Only exclude build artifacts and dependencies that can be reinstalled
 $excludeFolders = @(
     'node_modules',
-    '.git',
     'build',
     'dist',
-    'lib',
-    '.playwright-mcp'
+    'lib'
 )
 
 Write-Host "Creating comprehensive team package..." -ForegroundColor Green
+Write-Host "Including: ALL source code, .gitignore, .env files, Firebase admin SDK, configurations" -ForegroundColor Cyan
 Write-Host "Excluding folders: $($excludeFolders -join ', ')" -ForegroundColor Yellow
 
 # Get all files recursively, excluding specified folders
@@ -78,18 +78,18 @@ Write-Host "Size: $([math]::Round((Get-Item $zipPath).Length / 1MB, 2)) MB" -For
 
 # List what's included
 Write-Host "`nPackage includes:" -ForegroundColor Yellow
-Write-Host "+ All source code (src, functions, landing, dev-server, codecollab01)" -ForegroundColor White
+Write-Host "+ All source code (src, functions, landing, dev-server)" -ForegroundColor White
+Write-Host "+ .gitignore files (root and subdirectories)" -ForegroundColor White
+Write-Host "+ .env and .env.example files" -ForegroundColor White
+Write-Host "+ Firebase admin SDK (dev-server/codecollab-v2-firebase-adminsdk.json)" -ForegroundColor White
 Write-Host "+ Configuration files (package.json, tsconfig.json, vite.config.ts, etc.)" -ForegroundColor White
-Write-Host "+ Environment files (.env* files)" -ForegroundColor White
 Write-Host "+ Firebase configuration (firebase.json, firestore.rules, firestore.indexes.json)" -ForegroundColor White
 Write-Host "+ Data Connect schemas and queries (dataconnect folder)" -ForegroundColor White
 Write-Host "+ HTML files (index.html, landing/index.html)" -ForegroundColor White
 Write-Host "+ Public assets (logos, icons, images)" -ForegroundColor White
-Write-Host "+ All component code" -ForegroundColor White
-Write-Host "+ Utility functions" -ForegroundColor White
-Write-Host "+ Service files" -ForegroundColor White
-Write-Host "+ Email setup documentation" -ForegroundColor White
+Write-Host "+ All component code and utilities" -ForegroundColor White
+Write-Host "+ Git repository (.git folder for version history)" -ForegroundColor White
+Write-Host "+ Scripts (create-team-package.ps1, install-node.bat)" -ForegroundColor White
 Write-Host "`nExcluded (teammates will install these):" -ForegroundColor Yellow
-Write-Host "- node_modules folders" -ForegroundColor Gray
+Write-Host "- node_modules folders (run 'npm install' to restore)" -ForegroundColor Gray
 Write-Host "- Build outputs (build, dist, lib folders)" -ForegroundColor Gray
-Write-Host "- Git history (.git folder)" -ForegroundColor Gray

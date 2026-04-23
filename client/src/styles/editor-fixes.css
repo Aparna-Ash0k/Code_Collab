@@ -1,0 +1,953 @@
+/* ========================================
+   EDITOR FIXES - Cursor, Selection & Minimap
+======================================== */
+
+/* Y.js Collaboration Status Styles */
+.collaboration-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #cccccc;
+}
+
+.collaboration-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.collaboration-indicator.connected {
+  background-color: rgba(0, 122, 204, 0.2);
+  color: #4CAF50;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.collaboration-indicator.disconnected {
+  background-color: rgba(255, 107, 107, 0.2);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.collaborator-count {
+  font-size: 11px;
+  color: #007ACC;
+  font-weight: 500;
+}
+
+/* Editor Footer Enhancement for Y.js Status */
+.editor-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 12px;
+  background: #252526;
+  border-top: 1px solid #3e3e42;
+  font-size: 12px;
+  color: #cccccc;
+  gap: 12px;
+}
+
+/* Ensure cursor is always visible and properly styled */
+.code-textarea {
+  caret-color: #ffffff !important; /* White cursor for dark theme */
+  cursor: text !important;
+  overflow: auto !important; /* Enable scrollbars for long content */
+  resize: none !important; /* Prevent manual resizing */
+  scrollbar-width: auto !important; /* Show scrollbars on Firefox */
+}
+
+.code-textarea:focus {
+  caret-color: #ffffff !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Custom scrollbar styling for textarea */
+.code-textarea::-webkit-scrollbar {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.code-textarea::-webkit-scrollbar-track {
+  background: #1e1e1e !important;
+  border-radius: 6px !important;
+}
+
+.code-textarea::-webkit-scrollbar-thumb {
+  background: #424242 !important;
+  border-radius: 6px !important;
+  border: 2px solid #1e1e1e !important;
+}
+
+.code-textarea::-webkit-scrollbar-thumb:hover {
+  background: #555555 !important;
+}
+
+.code-textarea::-webkit-scrollbar-corner {
+  background: #1e1e1e !important;
+}
+
+/* Fix text selection with beautiful blue highlighting */
+.code-textarea::selection {
+  background-color: #264f78 !important; /* VS Code selection blue */
+  color: #ffffff !important;
+}
+
+.code-textarea::-moz-selection {
+  background-color: #264f78 !important;
+  color: #ffffff !important;
+}
+
+/* Enhanced text selection for better visibility */
+::selection {
+  background-color: #264f78 !important;
+  color: #ffffff !important;
+}
+
+::-moz-selection {
+  background-color: #264f78 !important;
+  color: #ffffff !important;
+}
+
+/* Monaco Editor cursor and selection fixes */
+.monaco-editor .cursor {
+  color: #ffffff !important;
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+.monaco-editor .cursors-layer .cursor {
+  background-color: #ffffff !important;
+  border-left: 2px solid #ffffff !important;
+}
+
+.monaco-editor .selected-text {
+  background-color: #264f78 !important;
+  color: #ffffff !important;
+}
+
+.monaco-editor .current-line {
+  background-color: #2a2d2e !important;
+}
+
+.monaco-editor .view-lines .view-line span {
+  color: #cccccc !important;
+}
+
+/* Minimap fixes - proper sizing and responsive behavior */
+.minimap {
+  width: 120px !important;
+  min-width: 120px !important;
+  max-width: 200px !important;
+  background-color: #1e1e1e !important;
+  border-left: 1px solid #3e3e42 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  position: sticky !important; /* Keep minimap in view */
+  top: 0 !important;
+  right: 0 !important;
+  font-family: inherit !important;
+  flex-shrink: 0 !important;
+  height: 100% !important; /* Full height of parent */
+  max-height: 600px !important; /* Prevent excessive height */
+}
+
+/* Editor main layout fixes */
+.editor-main {
+  display: flex !important;
+  flex-direction: row !important;
+  height: 100% !important;
+  min-height: 400px !important;
+  max-height: 600px !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.code-area {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important; /* Allow shrinking */
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+.code-textarea {
+  flex: 1 !important;
+  height: 100% !important;
+  min-height: 400px !important;
+  max-height: 600px !important;
+  overflow: auto !important;
+  resize: none !important;
+}
+
+/* Line numbers container fixes */
+.line-numbers {
+  flex-shrink: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: 100% !important;
+  max-height: 600px !important;
+  position: sticky !important;
+  top: 0 !important;
+  background-color: #1e1e1e !important;
+  border-right: 1px solid #3e3e42 !important;
+}
+
+/* Sync scrolling between line numbers and textarea */
+.line-numbers::-webkit-scrollbar {
+  width: 0 !important; /* Hide scrollbar for line numbers */
+}
+
+.line-numbers {
+  scrollbar-width: none !important; /* Hide scrollbar on Firefox */
+}
+
+.minimap-content {
+  padding: 4px 0 !important;
+  font-size: 2px !important;
+  line-height: 3px !important;
+  font-family: inherit !important;
+  color: #858585 !important;
+}
+
+.minimap-line {
+  height: 3px !important;
+  min-height: 3px !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  padding: 0 2px !important;
+  cursor: pointer !important;
+  transition: background-color 0.1s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+}
+
+.minimap-line:hover {
+  background-color: #2a2d2e !important;
+}
+
+.minimap-line-number {
+  color: #6a6a6a !important;
+  margin-right: 2px !important;
+  font-size: 2px !important;
+  min-width: 8px !important;
+  text-align: right !important;
+}
+
+.minimap-code {
+  color: #858585 !important;
+  font-size: 2px !important;
+  opacity: 0.8 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Custom scrollbar for minimap */
+.minimap::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.minimap::-webkit-scrollbar-track {
+  background: #1e1e1e !important;
+}
+
+.minimap::-webkit-scrollbar-thumb {
+  background: #424242 !important;
+  border-radius: 3px !important;
+}
+
+.minimap::-webkit-scrollbar-thumb:hover {
+  background: #555 !important;
+}
+
+/* Enhanced cursor blinking animation */
+@keyframes cursorBlink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.code-textarea {
+  animation: none !important; /* Ensure no conflicting animations */
+}
+
+.code-textarea:focus {
+  animation: none !important;
+}
+
+/* Fix cursor position tracking */
+.code-textarea:focus {
+  caret-color: #ffffff !important;
+}
+
+/* Monaco Editor specific fixes */
+.monaco-editor.focused .cursors-layer .cursor {
+  animation: monaco-cursor-blink 1s linear infinite !important;
+}
+
+@keyframes monaco-cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.monaco-editor .view-lines .view-line {
+  color: #cccccc !important;
+}
+
+.monaco-editor .margin-view-overlays .current-line-margin {
+  background-color: #2a2d2e !important;
+}
+
+/* Better focus indicators */
+.monaco-editor:focus-within {
+  outline: 1px solid #007acc !important;
+  outline-offset: -1px !important;
+}
+
+/* Responsive minimap behavior */
+@media (max-width: 1200px) {
+  .minimap {
+    width: 100px !important;
+    min-width: 100px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .minimap {
+    width: 80px !important;
+    min-width: 80px !important;
+  }
+  
+  .minimap-content {
+    font-size: 1.5px !important;
+    line-height: 2.5px !important;
+  }
+  
+  .minimap-line {
+    height: 2.5px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .minimap {
+    display: none !important; /* Hide minimap on very small screens */
+  }
+}
+
+/* Ensure proper text rendering in editor */
+.code-textarea {
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  font-feature-settings: "liga", "calt" !important;
+}
+
+/* Fix for cursor disappearing during selection */
+.code-textarea:active,
+.code-textarea:focus:active {
+  caret-color: #ffffff !important;
+}
+
+/* Enhanced selection highlighting for better UX */
+.code-textarea {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+}
+
+/* Fix potential z-index issues */
+.editor-main {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.code-area {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.code-textarea {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.minimap {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Better line height consistency */
+.code-textarea,
+.line-numbers .line-number {
+  line-height: 1.5 !important;
+}
+
+/* Ensure proper focus states */
+.code-textarea:focus-visible {
+  outline: 1px solid #007acc !important;
+  outline-offset: -1px !important;
+}
+
+/* Fix for Monaco Editor integration issues */
+.monaco-editor .cursor {
+  caret-color: #ffffff !important;
+}
+
+.monaco-editor .monaco-editor-background {
+  background-color: #1e1e1e !important;
+}
+
+.monaco-editor .view-lines .view-line {
+  color: #cccccc !important;
+}
+
+/* Enhanced minimap scrolling */
+.minimap {
+  scroll-behavior: smooth !important;
+}
+
+/* Fix for outline panel when minimap is visible */
+.outline-panel {
+  z-index: 3 !important;
+}
+
+/* Better performance for large files */
+.minimap-line {
+  will-change: background-color !important;
+  contain: layout style !important;
+}
+
+.code-textarea {
+  will-change: scroll-position !important;
+  contain: layout !important;
+}
+
+/* Additional layout fixes for long content */
+.ide-editor {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+.editor-header {
+  flex-shrink: 0 !important;
+  z-index: 10 !important;
+}
+
+.editor-footer {
+  flex-shrink: 0 !important;
+  z-index: 10 !important;
+}
+
+/* Ensure proper scrolling behavior */
+.code-textarea {
+  scroll-behavior: smooth !important;
+  white-space: pre !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Fix minimap positioning when content overflows */
+.minimap {
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  z-index: 5 !important;
+}
+
+/* Adjust code area to account for minimap */
+.editor-main .code-area {
+  margin-right: 120px !important; /* Make room for minimap */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .editor-main .code-area {
+    margin-right: 100px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .editor-main .code-area {
+    margin-right: 80px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .editor-main .code-area {
+    margin-right: 0 !important;
+  }
+}
+
+/* Additional Monaco Editor selection fixes */
+.monaco-editor .current-line ~ .view-lines .view-line {
+  background: transparent !important;
+}
+
+.monaco-editor .selected-text,
+.monaco-editor .selection {
+  background-color: #264f78 !important;
+}
+
+.monaco-editor .focused .selected-text,
+.monaco-editor .focused .selection {
+  background-color: #264f78 !important;
+  color: #ffffff !important;
+}
+
+/* Ensure cursor doesn't disappear during typing */
+.monaco-editor .cursors-layer {
+  animation: none !important;
+}
+
+.monaco-editor .cursor {
+  animation: monaco-cursor-blink 1s linear infinite !important;
+}
+
+/* Fix any overlay issues */
+.monaco-editor .overlayWidgets {
+  z-index: 100 !important;
+}
+
+/* Enhanced Monaco Editor selection fixes */
+.monaco-editor .current-line ~ .view-lines .view-line {
+  background: transparent !important;
+}
+
+.monaco-editor .selected-text,
+.monaco-editor .selection {
+  background-color: #264f78 !important;
+}
+
+.monaco-editor .focused .selected-text,
+.monaco-editor .focused .selection {
+  background-color: #264f78 !important;
+  color: #ffffff !important;
+}
+
+/* Ensure cursor doesn't disappear during typing */
+.monaco-editor .cursors-layer {
+  animation: none !important;
+}
+
+.monaco-editor .cursor {
+  animation: monaco-cursor-blink 1s linear infinite !important;
+}
+
+/* Fix any overlay issues */
+.monaco-editor .overlayWidgets {
+  z-index: 100 !important;
+}
+
+.monaco-editor .contentWidgets {
+  z-index: 101 !important;
+}
+
+/* ========================================
+   ENHANCED TERMINAL AND CODE RUNNER STYLING
+======================================== */
+
+/* Modern Terminal Styling - VS Code Theme */
+.modern-bottom-panel {
+  background: var(--vscode-panel) !important;
+  border-top: 1px solid var(--vscode-border) !important;
+  color: var(--vscode-text) !important;
+}
+
+.modern-tab-bar {
+  background: var(--vscode-panel) !important;
+  border-bottom: 1px solid var(--vscode-border) !important;
+}
+
+.modern-tab {
+  background: var(--vscode-panel) !important;
+  color: var(--vscode-text-secondary) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  min-height: 36px !important;
+  padding: 8px 16px !important;
+}
+
+.modern-tab:hover {
+  background: var(--vscode-hover) !important;
+  color: var(--vscode-text) !important;
+}
+
+.modern-tab.active-tab,
+.modern-tab[aria-pressed="true"] {
+  background: var(--vscode-bg) !important;
+  border-bottom: 2px solid var(--vscode-accent) !important;
+  color: var(--vscode-text) !important;
+}
+
+.modern-tab .tab-name {
+  color: inherit !important;
+  font-weight: 500 !important;
+}
+
+.modern-tab.active-tab .tab-name {
+  font-weight: 600 !important;
+}
+
+/* Terminal Header Styling */
+.terminal-header {
+  background: var(--vscode-panel) !important;
+  border-bottom: 1px solid var(--vscode-border) !important;
+  padding: 8px 16px !important;
+}
+
+.terminal-title {
+  color: var(--vscode-text) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+.terminal-subtitle {
+  color: var(--vscode-text-muted) !important;
+  font-size: 11px !important;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+}
+
+/* Terminal Content Area */
+.terminal-content {
+  background: var(--vscode-bg) !important;
+  color: var(--vscode-text) !important;
+}
+
+.terminal-logs {
+  background: var(--vscode-bg) !important;
+  color: var(--vscode-text) !important;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+}
+
+.terminal-log-entry {
+  color: var(--vscode-text) !important;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+}
+
+.terminal-log-entry:hover {
+  background: var(--vscode-hover) !important;
+}
+
+.terminal-message {
+  color: var(--vscode-text) !important;
+}
+
+/* Terminal Input Styling */
+.terminal-input-area {
+  background: var(--vscode-panel) !important;
+  border-top: 1px solid var(--vscode-border) !important;
+  padding: 12px 16px !important;
+}
+
+.terminal-input-form {
+  background: var(--vscode-bg) !important;
+  border: 1px solid var(--vscode-border) !important;
+  border-radius: 4px !important;
+  padding: 8px 12px !important;
+}
+
+.terminal-input-form:focus-within {
+  border-color: var(--vscode-accent) !important;
+  box-shadow: 0 0 0 1px var(--vscode-accent) !important;
+}
+
+.terminal-prompt-symbol {
+  color: #22c55e !important;
+  font-weight: 600 !important;
+}
+
+.terminal-path {
+  color: var(--vscode-accent) !important;
+  font-size: 12px !important;
+}
+
+.terminal-input {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  color: var(--vscode-text) !important;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-size: 14px !important;
+  caret-color: #22c55e !important;
+}
+
+.terminal-input::placeholder {
+  color: var(--vscode-text-muted) !important;
+}
+
+/* Terminal Controls */
+.terminal-btn {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 4px !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  color: var(--vscode-text-secondary) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.terminal-btn:hover {
+  background: var(--vscode-hover) !important;
+  color: var(--vscode-text) !important;
+  border-color: var(--vscode-border) !important;
+}
+
+.terminal-btn-success {
+  background: rgba(34, 197, 94, 0.1) !important;
+  color: #22c55e !important;
+  border-color: rgba(34, 197, 94, 0.3) !important;
+}
+
+.terminal-btn-success:hover {
+  background: rgba(34, 197, 94, 0.2) !important;
+}
+
+.terminal-btn-warning {
+  background: rgba(245, 158, 11, 0.1) !important;
+  color: #f59e0b !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+
+.terminal-btn-warning:hover {
+  background: rgba(245, 158, 11, 0.2) !important;
+}
+
+.terminal-btn-neutral {
+  background: rgba(107, 114, 128, 0.1) !important;
+  color: var(--vscode-text-secondary) !important;
+  border-color: rgba(107, 114, 128, 0.3) !important;
+}
+
+.terminal-btn-neutral:hover {
+  background: rgba(107, 114, 128, 0.2) !important;
+  color: var(--vscode-text) !important;
+}
+
+/* Code Runner Styling */
+.modern-code-runner {
+  background: var(--vscode-panel) !important;
+  border: 1px solid var(--vscode-border) !important;
+  border-radius: 4px !important;
+  overflow: hidden !important;
+}
+
+.modern-code-runner .btn-primary {
+  background: var(--vscode-accent) !important;
+  border-color: var(--vscode-accent) !important;
+  color: white !important;
+  border-radius: 4px !important;
+  padding: 6px 12px !important;
+  font-size: 13px !important;
+  transition: all 0.2s ease !important;
+}
+
+.modern-code-runner .btn-primary:hover {
+  background: var(--vscode-accent-hover) !important;
+  border-color: var(--vscode-accent-hover) !important;
+  transform: none !important;
+}
+
+.modern-code-runner .btn-primary:disabled {
+  background: var(--vscode-text-muted) !important;
+  border-color: var(--vscode-text-muted) !important;
+  opacity: 0.5 !important;
+}
+
+.modern-code-runner .btn-secondary {
+  background: transparent !important;
+  border: 1px solid var(--vscode-border) !important;
+  color: var(--vscode-text) !important;
+  border-radius: 4px !important;
+  padding: 6px 12px !important;
+  font-size: 13px !important;
+  transition: all 0.2s ease !important;
+}
+
+.modern-code-runner .btn-secondary:hover {
+  background: var(--vscode-hover) !important;
+  border-color: var(--vscode-accent) !important;
+  transform: none !important;
+}
+
+.modern-code-runner .btn-secondary:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+/* Code Runner Language Selector */
+.modern-code-runner select {
+  background: var(--vscode-panel) !important;
+  border: 1px solid var(--vscode-border) !important;
+  color: var(--vscode-text) !important;
+  border-radius: 4px !important;
+  padding: 4px 8px !important;
+  font-size: 13px !important;
+}
+
+.modern-code-runner select:focus {
+  border-color: var(--vscode-accent) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px var(--vscode-accent) !important;
+}
+
+/* Code Runner Output Panel */
+.modern-code-runner .input,
+.modern-code-runner textarea {
+  background: var(--surface-tertiary) !important;
+  border: 1px solid var(--vscode-border) !important;
+  color: var(--vscode-text) !important;
+  border-radius: 4px !important;
+  padding: 8px 12px !important;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-size: 13px !important;
+}
+
+.modern-code-runner .input:focus,
+.modern-code-runner textarea:focus {
+  border-color: var(--vscode-accent) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px var(--vscode-accent) !important;
+}
+
+.modern-code-runner .input::placeholder,
+.modern-code-runner textarea::placeholder {
+  color: var(--vscode-text-muted) !important;
+}
+
+/* Status indicators */
+.text-text-success {
+  color: var(--vscode-success) !important;
+}
+
+.text-text-error {
+  color: var(--vscode-error) !important;
+}
+
+.text-text-warning {
+  color: var(--vscode-warning) !important;
+}
+
+.text-text-primary {
+  color: var(--vscode-text) !important;
+}
+
+.text-text-secondary {
+  color: var(--vscode-text-secondary) !important;
+}
+
+.text-text-tertiary,
+.text-text-muted {
+  color: var(--vscode-text-muted) !important;
+}
+
+.text-text-accent {
+  color: var(--vscode-accent) !important;
+}
+
+/* Background utilities */
+.bg-surface-primary {
+  background: var(--vscode-bg) !important;
+}
+
+.bg-surface-secondary {
+  background: var(--vscode-panel) !important;
+}
+
+.bg-surface-tertiary {
+  background: var(--vscode-sidebar) !important;
+}
+
+.bg-hover-primary {
+  background: var(--vscode-hover) !important;
+}
+
+/* Border utilities */
+.border-border-primary {
+  border-color: var(--vscode-border) !important;
+}
+
+.border-border-secondary {
+  border-color: var(--vscode-text-muted) !important;
+}
+
+/* Panel Controls */
+.panel-control-btn {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 4px !important;
+  background: transparent !important;
+  border: none !important;
+  color: var(--vscode-text-secondary) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.panel-control-btn:hover {
+  background: var(--vscode-hover) !important;
+  color: var(--vscode-text) !important;
+}
+
+/* Tab badges */
+.tab-badge {
+  background: var(--vscode-error) !important;
+  color: white !important;
+  font-size: 11px !important;
+  padding: 2px 6px !important;
+  border-radius: 9px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  min-width: 16px !important;
+  text-align: center !important;
+}
+
+/* Terminal scrollbar styling */
+.terminal-content::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.terminal-content::-webkit-scrollbar-track {
+  background: var(--vscode-panel) !important;
+}
+
+.terminal-content::-webkit-scrollbar-thumb {
+  background: var(--vscode-border) !important;
+  border-radius: 4px !important;
+}
+
+.terminal-content::-webkit-scrollbar-thumb:hover {
+  background: var(--vscode-text-muted) !important;
+}
+
+/* Code runner specific fixes */
+.modern-code-runner .bg-surface-tertiary {
+  background: var(--vscode-panel) !important;
+}
+
+.modern-code-runner .bg-surface-secondary {
+  background: var(--vscode-sidebar) !important;
+}
+
+/* Fix for button groups */
+.modern-code-runner .flex.items-center.gap-2 > button {
+  margin-right: 8px !important;
+}
+
+.modern-code-runner .flex.items-center.gap-2 > button:last-child {
+  margin-right: 0 !important;
+}

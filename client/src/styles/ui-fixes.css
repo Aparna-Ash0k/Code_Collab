@@ -1,0 +1,808 @@
+/* CSS Fixes for CodeCollab Application */
+
+/* ========================================
+   CRITICAL LAYOUT FIXES
+======================================== */
+
+/* Ensure proper app container height and overflow */
+#root {
+  height: 100vh !important;
+  overflow: hidden !important;
+  background-color: var(--bg-primary) !important;
+}
+
+.App, .minimal-app {
+  height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-family-sans) !important;
+}
+
+/* Fix main layout flexbox issues */
+.main-layout, .main-content {
+  display: flex !important;
+  flex: 1 !important;
+  overflow: hidden !important;
+  height: calc(100vh - var(--top-bar-height) - var(--status-bar-height)) !important;
+}
+
+/* ========================================
+   LAYOUT STRUCTURE FIXES
+======================================== */
+
+/* Main content container */
+.main-content {
+  display: flex !important;
+  flex: 1 !important;
+  overflow: hidden !important;
+  background: var(--bg-primary) !important;
+}
+
+/* Editor area container */
+.editor-area {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background-color: var(--surface-editor) !important;
+  overflow: hidden !important;
+  min-width: 0 !important;
+}
+
+/* ========================================
+   ADDITIONAL LAYOUT FIXES
+======================================== */
+
+/* Ensure proper flex behavior for all layout components */
+.minimal-app > * {
+  flex-shrink: 0;
+}
+
+.main-content > * {
+  flex-shrink: 0;
+}
+
+.editor-area > * {
+  flex-shrink: 0;
+}
+
+/* Fix the editor container to take remaining space */
+.minimal-editor {
+  flex: 1 !important;
+  overflow: hidden !important;
+}
+
+/* Ensure activity bar stays fixed width */
+.minimal-activity-bar {
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+}
+
+/* Ensure sidebar has proper width */
+.minimal-sidebar {
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+}
+
+/* Fix tab bar to not grow */
+.minimal-tab-bar {
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+}
+
+/* Fix status bar positioning */
+.minimal-status-bar {
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+}
+
+/* ========================================
+   COMPONENT LAYOUT FIXES
+======================================== */
+
+/* Fix minimal topbar */
+.minimal-topbar {
+  height: var(--top-bar-height) !important;
+  min-height: var(--top-bar-height) !important;
+  background: var(--surface-primary) !important;
+  border-bottom: 1px solid var(--border-primary) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 16px !important;
+  flex-shrink: 0 !important;
+  z-index: 100;
+}
+
+/* Fix minimal activity bar */
+.minimal-activity-bar {
+  width: var(--activity-bar-width) !important;
+  min-width: var(--activity-bar-width) !important;
+  max-width: var(--activity-bar-width) !important;
+  background: var(--surface-secondary) !important;
+  border-right: 1px solid var(--border-primary) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  padding: 8px 0 !important;
+  gap: 4px !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+  z-index: 80;
+}
+
+.activity-bar-icon {
+  justify-content: center !important;
+  cursor: pointer !important;
+  color: #969696 !important;
+  transition: all 0.15s ease !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+}
+
+.activity-bar-icon:hover {
+  background-color: #2a2d2e !important;
+  color: #cccccc !important;
+}
+
+.activity-bar-icon.active {
+  border-left: 2px solid #007acc !important;
+  background-color: #2a2d2e !important;
+  color: white !important;
+}
+
+/* ========================================
+   SIDEBAR FIXES
+======================================== */
+
+.sidebar {
+  width: 320px !important;
+  min-width: 320px !important;
+  background-color: #2d2d30 !important;
+  border-right: 1px solid #3e3e42 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+  transition: width 0.2s ease !important;
+}
+
+.sidebar.collapsed {
+  width: 0 !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+/* ========================================
+   EDITOR AREA FIXES
+======================================== */
+
+.editor-area {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background-color: #1e1e1e !important;
+  overflow: hidden !important;
+  min-width: 0 !important; /* Important for flex shrinking */
+}
+
+/* Tab Bar Fixes */
+.minimal-tab-bar {
+  height: 36px !important;
+  min-height: 36px !important;
+  background-color: #2d2d30 !important;
+  border-bottom: 1px solid #3e3e42 !important;
+  display: flex !important;
+  align-items: center !important;
+  overflow-x: auto !important;
+  flex-shrink: 0 !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.minimal-tab-bar::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Editor Container Fixes */
+.editor-container {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  background-color: #1e1e1e !important;
+}
+
+/* ========================================
+   SIMPLE EDITOR FIXES
+======================================== */
+
+.ide-editor {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  background-color: #1e1e1e !important;
+  font-family: 'Fira Code', 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', monospace !important;
+}
+
+.editor-header {
+  height: 32px !important;
+  min-height: 32px !important;
+  background-color: #2d2d30 !important;
+  border-bottom: 1px solid #3e3e42 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 12px !important;
+  flex-shrink: 0 !important;
+}
+
+.editor-main {
+  flex: 1 !important;
+  display: flex !important;
+  overflow: hidden !important;
+  background-color: #1e1e1e !important;
+}
+
+.line-numbers {
+  width: 50px !important;
+  min-width: 50px !important;
+  background-color: #1e1e1e !important;
+  color: #858585 !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  padding: 8px 4px !important;
+  text-align: right !important;
+  user-select: none !important;
+  border-right: 1px solid #3e3e42 !important;
+  overflow: hidden !important;
+}
+
+.line-number {
+  height: 21px !important; /* Match line height */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  padding-right: 8px !important;
+}
+
+.code-area {
+  flex: 1 !important;
+  display: flex !important;
+  overflow: hidden !important;
+  background-color: #1e1e1e !important;
+}
+
+.code-textarea {
+  flex: 1 !important;
+  background-color: #1e1e1e !important;
+  color: #cccccc !important;
+  border: none !important;
+  outline: none !important;
+  resize: none !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  padding: 8px 12px !important;
+  overflow: auto !important;
+  white-space: pre !important;
+  word-wrap: normal !important;
+  overflow-wrap: normal !important;
+  tab-size: 2 !important;
+}
+
+.code-textarea::placeholder {
+  color: #6a6a6a !important;
+  font-style: italic !important;
+}
+
+.code-textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* ========================================
+   SCROLLBAR FIXES
+======================================== */
+
+/* Custom scrollbars for better UX */
+.code-textarea::-webkit-scrollbar,
+.sidebar-content::-webkit-scrollbar,
+.file-tree::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+.code-textarea::-webkit-scrollbar-track,
+.sidebar-content::-webkit-scrollbar-track,
+.file-tree::-webkit-scrollbar-track {
+  background: #1e1e1e !important;
+}
+
+.code-textarea::-webkit-scrollbar-thumb,
+.sidebar-content::-webkit-scrollbar-thumb,
+.file-tree::-webkit-scrollbar-thumb {
+  background: #424242 !important;
+  border-radius: 4px !important;
+  border: 1px solid #1e1e1e !important;
+}
+
+.code-textarea::-webkit-scrollbar-thumb:hover,
+.sidebar-content::-webkit-scrollbar-thumb:hover,
+.file-tree::-webkit-scrollbar-thumb:hover {
+  background: #555 !important;
+}
+
+.code-textarea::-webkit-scrollbar-corner,
+.sidebar-content::-webkit-scrollbar-corner,
+.file-tree::-webkit-scrollbar-corner {
+  background: #1e1e1e !important;
+}
+
+/* ========================================
+   FILE EXPLORER FIXES
+======================================== */
+
+.explorer-header {
+  height: 40px !important;
+  min-height: 40px !important;
+  padding: 12px !important;
+  border-bottom: 1px solid #3e3e42 !important;
+  background-color: #2d2d30 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-shrink: 0 !important;
+}
+
+.explorer-title {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #cccccc !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.file-tree {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  padding: 4px !important;
+  background-color: #2d2d30 !important;
+}
+
+.file-tree-item {
+  display: flex !important;
+  align-items: center !important;
+  padding: 4px 8px !important;
+  cursor: pointer !important;
+  color: #cccccc !important;
+  font-size: 14px !important;
+  transition: background-color 0.15s ease !important;
+  border-radius: 3px !important;
+  margin: 1px 0 !important;
+}
+
+/* Ensure file tree items stack vertically with proper container */
+.file-tree-item-container {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.file-tree-item:hover {
+  background-color: #2a2d2e !important;
+  color: white !important;
+}
+
+.file-tree-item.active {
+  background-color: #37373d !important;
+  color: white !important;
+}
+
+.file-tree-icon {
+  margin-right: 8px !important;
+  color: #007acc !important;
+  flex-shrink: 0 !important;
+}
+
+/* ========================================
+   STATUS BAR FIXES
+======================================== */
+
+.minimal-status-bar {
+  height: 22px !important;
+  min-height: 22px !important;
+  background-color: #007acc !important;
+  color: white !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 12px !important;
+  font-size: 12px !important;
+  flex-shrink: 0 !important;
+}
+
+.status-left,
+.status-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.status-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  cursor: pointer !important;
+  padding: 2px 6px !important;
+  border-radius: 3px !important;
+  transition: background-color 0.15s ease !important;
+}
+
+.status-item:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ========================================
+   TOP BAR FIXES
+======================================== */
+
+.minimal-topbar {
+  height: 40px !important;
+  min-height: 40px !important;
+  background-color: #2d2d30 !important;
+  border-bottom: 1px solid #3e3e42 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 16px !important;
+  flex-shrink: 0 !important;
+}
+
+.logo {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-weight: 600 !important;
+  color: #cccccc !important;
+}
+
+.logo-icon {
+  width: 20px !important;
+  height: 20px !important;
+  background: #007acc !important;
+  border-radius: 3px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: white !important;
+}
+
+.actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+/* ========================================
+   RESPONSIVE FIXES
+======================================== */
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 280px !important;
+    min-width: 280px !important;
+  }
+  
+  .activity-bar {
+    width: 44px !important;
+    min-width: 44px !important;
+  }
+  
+  .activity-bar-icon {
+    width: 44px !important;
+    height: 44px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100vw !important;
+    position: absolute !important;
+    z-index: 1000 !important;
+    left: 48px !important;
+    top: 0 !important;
+    height: 100% !important;
+  }
+  
+  .sidebar.collapsed {
+    left: -100vw !important;
+  }
+  
+  .activity-bar {
+    width: 40px !important;
+    min-width: 40px !important;
+  }
+  
+  .activity-bar-icon {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+
+/* ========================================
+   PERFORMANCE OPTIMIZATIONS
+======================================== */
+
+/* Use hardware acceleration for smooth animations */
+.activity-bar-icon,
+.file-tree-item,
+.tab-item,
+.status-item {
+  will-change: background-color !important;
+  transform: translateZ(0) !important;
+}
+
+/* Reduce repaints during scrolling */
+.code-textarea,
+.file-tree {
+  will-change: scroll-position !important;
+}
+
+/* ========================================
+   ACCESSIBILITY FIXES
+======================================== */
+
+/* Better focus indicators */
+.activity-bar-icon:focus-visible,
+.file-tree-item:focus-visible,
+.tab-item:focus-visible,
+.status-item:focus-visible {
+  outline: 2px solid #007acc !important;
+  outline-offset: -2px !important;
+}
+
+/* Screen reader improvements */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ========================================
+   THEME TRANSITION FIXES
+======================================== */
+
+/* Smooth theme transitions - optimized */
+:root {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+body {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Critical elements only for performance */
+.activity-bar,
+.sidebar,
+.editor-area,
+.minimal-topbar,
+.minimal-status-bar {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Prevent transition on initial load */
+.preload,
+.preload * {
+  transition: none !important;
+}
+
+/* ========================================
+   BUG FIXES
+======================================== */
+
+/* Fix text selection in editor */
+.code-textarea {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+}
+
+/* Fix cursor appearance */
+.code-textarea {
+  cursor: text !important;
+}
+
+/* Fix input focus issues */
+input:focus,
+textarea:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #007acc !important;
+}
+
+/* Standard input and textarea styling with darker background */
+input,
+textarea {
+  background: var(--surface-tertiary) !important;
+  border: 1px solid var(--border-primary) !important;
+  color: var(--text-primary) !important;
+  border-radius: 4px !important;
+}
+
+/* Special styling for Standard Input textarea in Code Runner */
+.modern-code-runner textarea[placeholder*="stdin"],
+.modern-code-runner textarea[placeholder*="input for your program"],
+.stdin-black-bg {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+input:focus,
+textarea:focus {
+  background: var(--surface-tertiary) !important;
+  border-color: var(--text-accent) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px var(--text-accent) !important;
+}
+
+/* Override focus styling for Standard Input textarea to maintain black background */
+.modern-code-runner textarea[placeholder*="stdin"]:focus,
+.modern-code-runner textarea[placeholder*="input for your program"]:focus,
+.stdin-black-bg:focus {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: var(--text-accent) !important;
+}
+
+/* Fix button hover states */
+button:hover {
+  transform: none !important;
+}
+
+/* Prevent unnecessary scrollbars */
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+/* Fix flexbox issues in older browsers */
+.flex {
+  display: flex !important;
+}
+
+.flex-1 {
+  flex: 1 !important;
+}
+
+.flex-col {
+  flex-direction: column !important;
+}
+
+.items-center {
+  align-items: center !important;
+}
+
+.justify-between {
+  justify-content: space-between !important;
+}
+
+/* ========================================
+   TERMINAL/CODE RUNNER PANEL IMPROVEMENTS
+======================================== */
+
+/* Fix terminal/code runner side panel positioning for better visibility */
+.terminal-side-panel {
+  width: 320px !important;
+  min-width: 320px !important;
+  max-width: 400px !important;
+  background: var(--surface-secondary) !important;
+  border-left: 1px solid var(--border-primary) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  z-index: 50;
+}
+
+@media (min-width: 1280px) {
+  .terminal-side-panel {
+    width: 384px !important; /* w-96 equivalent */
+    min-width: 384px !important;
+  }
+}
+
+/* Ensure the side panel is always visible on desktop */
+@media (min-width: 768px) {
+  .terminal-side-panel {
+    display: flex !important;
+  }
+}
+
+/* Hide side panel on mobile, use bottom panel instead */
+@media (max-width: 767px) {
+  .terminal-side-panel {
+    display: none !important;
+  }
+  
+  .mobile-bottom-panel {
+    height: 256px !important; /* h-64 equivalent */
+    border-top: 1px solid var(--border-primary) !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
+
+/* Improve code runner and terminal visibility */
+.bottom-panel-content {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  background: var(--surface-secondary) !important;
+}
+
+/* Make the terminal and code runner tabs more prominent */
+.bottom-panel-tabs {
+  background: var(--surface-primary) !important;
+  border-bottom: 1px solid var(--border-primary) !important;
+  padding: 0 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  height: 36px !important;
+  min-height: 36px !important;
+}
+
+.bottom-panel-tab {
+  padding: 6px 12px !important;
+  border-radius: var(--radius-sm) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all var(--transition-fast) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: var(--text-secondary) !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.bottom-panel-tab:hover {
+  background: var(--hover-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+.bottom-panel-tab.active {
+  background: var(--bg-accent) !important;
+  color: var(--text-on-accent) !important;
+}
+
+/* Ensure proper editor layout with side panel */
+.editor-with-side-panel {
+  display: flex !important;
+  flex: 1 !important;
+  overflow: hidden !important;
+}
+
+.editor-with-side-panel .minimal-editor {
+  flex: 1 !important;
+  min-width: 0 !important; /* Allow shrinking */
+}
+
+/* Responsive adjustments for better UX */
+@media (max-width: 1024px) {
+  .terminal-side-panel {
+    width: 280px !important;
+    min-width: 280px !important;
+  }
+}
+

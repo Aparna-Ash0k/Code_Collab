@@ -1,0 +1,263 @@
+.project-breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--vscode-breadcrumb-background);
+  border-bottom: 1px solid var(--vscode-breadcrumb-border, var(--vscode-panel-border));
+  font-size: 12px;
+  min-height: 32px;
+  gap: 12px;
+}
+
+.project-breadcrumb.empty {
+  justify-content: center;
+}
+
+.no-project {
+  color: var(--vscode-descriptionForeground);
+  font-style: italic;
+}
+
+.breadcrumb-content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 0; /* Allow text truncation */
+}
+
+.breadcrumb-segment {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.project-root {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.segment-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--vscode-breadcrumb-foreground);
+  text-decoration: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.segment-link:hover {
+  background: var(--vscode-breadcrumb-focusBackground);
+  color: var(--vscode-breadcrumb-activeForeground);
+}
+
+.project-icon {
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.project-name {
+  font-weight: 500;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.breadcrumb-separator {
+  color: var(--vscode-breadcrumb-foreground);
+  opacity: 0.6;
+  margin: 0 2px;
+  font-weight: 300;
+}
+
+.breadcrumb-segment.current .segment-link {
+  color: var(--vscode-breadcrumb-activeForeground);
+  font-weight: 500;
+  cursor: default;
+}
+
+.breadcrumb-segment.current .segment-link:hover {
+  background: none;
+}
+
+.collaboration-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  flex-shrink: 0;
+}
+
+.collaboration-badge.owner {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #2d2d2d;
+}
+
+.collaboration-badge.editor {
+  background: linear-gradient(135deg, #4CAF50, #66BB6A);
+  color: white;
+}
+
+.collaboration-badge.viewer {
+  background: linear-gradient(135deg, #2196F3, #42A5F5);
+  color: white;
+}
+
+.breadcrumb-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.collaborators-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.collaborator-count {
+  color: var(--vscode-descriptionForeground);
+  font-size: 10px;
+  padding: 2px 6px;
+  background: var(--vscode-badge-background);
+  color: var(--vscode-badge-foreground);
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.project-type {
+  color: var(--vscode-descriptionForeground);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+  padding: 2px 6px;
+  background: var(--vscode-input-background);
+  border-radius: 3px;
+  border: 1px solid var(--vscode-input-border);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .project-breadcrumb {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 6px 8px;
+  }
+  
+  .breadcrumb-content {
+    width: 100%;
+  }
+  
+  .breadcrumb-info {
+    align-self: flex-end;
+    gap: 6px;
+  }
+  
+  .segment-link {
+    max-width: 100px;
+  }
+  
+  .project-name {
+    max-width: 80px;
+  }
+}
+
+/* Dark theme specific adjustments */
+@media (prefers-color-scheme: dark) {
+  .collaboration-badge.owner {
+    background: linear-gradient(135deg, #b8860b, #daa520);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .collaboration-badge.owner {
+    background: #ffff00;
+    color: #000000;
+    border: 1px solid #000000;
+  }
+  
+  .collaboration-badge.editor {
+    background: #00ff00;
+    color: #000000;
+    border: 1px solid #000000;
+  }
+  
+  .collaboration-badge.viewer {
+    background: #0080ff;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+  }
+  
+  .segment-link:hover {
+    border: 1px solid var(--vscode-focusBorder);
+  }
+}
+
+/* Animation for collaboration status changes */
+.collaboration-badge {
+  animation: badgeAppear 0.3s ease-out;
+}
+
+@keyframes badgeAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Truncation with tooltip-like behavior */
+.segment-link[title] {
+  cursor: help;
+}
+
+.breadcrumb-segment:last-child .segment-link {
+  max-width: none; /* Don't truncate the last segment */
+}
+
+/* Focus states for accessibility */
+.segment-link:focus {
+  outline: 2px solid var(--vscode-focusBorder);
+  outline-offset: 1px;
+}
+
+/* Loading state */
+.project-breadcrumb.loading {
+  opacity: 0.6;
+}
+
+.project-breadcrumb.loading .segment-link {
+  pointer-events: none;
+}
+
+/* Error state */
+.project-breadcrumb.error {
+  background: var(--vscode-errorBackground);
+  border-color: var(--vscode-errorBorder);
+}
+
+.project-breadcrumb.error .segment-link {
+  color: var(--vscode-errorForeground);
+}

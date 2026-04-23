@@ -1,0 +1,101 @@
+.live-activity-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.live-activity-indicator.compact {
+  gap: 4px;
+}
+
+.activity-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  padding: 4px 8px;
+  backdrop-filter: blur(4px);
+}
+
+.activity-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.activity-text {
+  color: #ffffff;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.cursors-indicator {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.cursor-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: bold;
+  border: 2px solid #2d2d30;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.cursor-avatar:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.cursor-overflow {
+  background: #666666;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 4px;
+}
+
+.live-activity-indicator.compact .activity-badge {
+  padding: 2px 6px;
+}
+
+.live-activity-indicator.compact .cursor-avatar {
+  width: 16px;
+  height: 16px;
+  font-size: 8px;
+}
+
+.live-activity-indicator.compact .activity-text {
+  display: none;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* File tree integration */
+.file-tree-item .live-activity-indicator {
+  margin-left: auto;
+}
+
+/* Tab integration */
+.tab .live-activity-indicator {
+  margin-left: 4px;
+}

@@ -1,0 +1,430 @@
+.enhanced-collaborators-panel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.enhanced-collaborators-panel {
+  background: #1e1e1e;
+  border: 1px solid #404040;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease-out;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #404040;
+  background: #252526;
+}
+
+.header-content h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.project-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.project-mode {
+  font-size: 12px;
+  color: #007acc;
+  font-weight: 500;
+}
+
+.project-name {
+  font-size: 14px;
+  color: #cccccc;
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.access-control-toggle {
+  background: #2d2d30;
+  border: 1px solid #404040;
+  color: #cccccc;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.access-control-toggle:hover {
+  background: #404040;
+  color: #ffffff;
+}
+
+.access-control-toggle.active {
+  background: #007acc;
+  border-color: #007acc;
+  color: #ffffff;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #cccccc;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  background: #404040;
+  color: #ffffff;
+}
+
+.panel-content {
+  padding: 24px;
+  overflow-y: auto;
+  max-height: calc(80vh - 80px);
+}
+
+.collaborator-section {
+  margin-bottom: 24px;
+}
+
+.collaborator-section h4 {
+  color: #ffffff;
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.collaborator-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #2d2d30;
+  border: 1px solid #404040;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.collaborator-item.current-user {
+  border-color: #007acc;
+  background: #1a365d;
+}
+
+.collaborator-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.collaborator-info {
+  flex: 1;
+}
+
+.collaborator-name {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.collaborator-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.access-level {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.join-time {
+  color: #b3b3b3;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.access-controls {
+  margin-left: auto;
+}
+
+.access-select {
+  background: #252526;
+  border: 1px solid #404040;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: #ffffff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.access-select:focus {
+  outline: none;
+  border-color: #007acc;
+}
+
+.no-collaborators {
+  text-align: center;
+  color: #b3b3b3;
+  padding: 40px 20px;
+}
+
+.no-collaborators-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.no-collaborators p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+}
+
+.share-hint {
+  font-size: 12px;
+  color: #888888;
+}
+
+.access-legend {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #404040;
+}
+
+.access-legend h4 {
+  color: #ffffff;
+  margin: 0 0 12px 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.legend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.legend-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.legend-item span:first-child {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.legend-item span:last-child {
+  color: #b3b3b3;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .enhanced-collaborators-panel {
+    width: 95%;
+    margin: 20px;
+    max-height: 90vh;
+  }
+
+  .panel-header {
+    padding: 16px 20px;
+  }
+
+  .header-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .panel-content {
+    padding: 20px;
+  }
+
+  .collaborator-item {
+    padding: 10px;
+  }
+
+  .collaborator-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .collaborator-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .access-controls {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  .access-select {
+    width: 100%;
+  }
+}
+
+/* Enhanced Collaborators Panel Styles for Right Panel Integration */
+
+.enhanced-collaborators-content {
+  padding: 16px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.project-info-section {
+  background: rgba(var(--vscode-editor-background-rgb), 0.5);
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.project-mode-badge {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--vscode-textPreformat-foreground);
+  margin-bottom: 4px;
+}
+
+.access-controls-section {
+  margin-bottom: 16px;
+}
+
+.access-control-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.access-control-toggle:hover {
+  background: var(--vscode-button-hoverBackground);
+}
+
+.access-control-toggle.active {
+  background: var(--vscode-focusBorder);
+}
+
+/* Enhanced panel styles for better integration with Figma theme */
+.figma-right-panel-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.figma-right-panel-tab svg {
+  flex-shrink: 0;
+}
+
+.no-collaborators {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--vscode-descriptionForeground);
+}
+
+.no-collaborators-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.session-info-section {
+  background: rgba(var(--vscode-editor-background-rgb), 0.3);
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.session-info-section h4 {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--vscode-foreground);
+  margin: 0 0 8px 0;
+}
+
+.session-details {
+  font-size: 11px;
+  color: var(--vscode-descriptionForeground);
+}
+
+.session-details div {
+  margin-bottom: 4px;
+}

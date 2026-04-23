@@ -1291,6 +1291,7 @@ app.post('/api/projects/:projectId/presence', async (req, res) => {
     const presenceData = {
       user_id: req.user.id,
       user_name: req.user.name,
+      user_email: req.user.email, // Add email to presence data
       user_avatar: req.user.name.charAt(0).toUpperCase(),
       file: file || null,
       cursor: cursor || null,
@@ -1339,14 +1340,22 @@ app.post('/api/projects/:projectId/presence', async (req, res) => {
 app.get('/api/projects/:projectId/collaborators', authenticate, async (req, res) => {
   try {
     const { projectId } = req.params;
+    console.log('\n🔍 === GET COLLABORATORS ENDPOINT ===');
+    console.log('📍 Timestamp:', new Date().toISOString());
+    console.log('🆔 Project ID:', projectId);
+    console.log('👤 Request User:', req.user?.id, req.user?.email);
+    console.log('🌐 Request IP:', req.ip);
+    console.log('🌐 Request Host:', req.hostname);
     
     if (!firestoreAvailable) {
       // Use mock database
       const collaborators = await mockOperations.getProjectCollaborators(projectId);
       if (!collaborators) {
+        console.log('❌ Project not found in mock database');
         return res.status(404).json({ error: 'Project not found' });
       }
-      console.log(`Found ${collaborators.length} collaborators for project ${projectId} (mock database)`);
+      console.log(`✅ Found ${collaborators.length} collaborators for project ${projectId} (mock database)`);
+      console.log('📋 Collaborators:', JSON.stringify(collaborators, null, 2));
       return res.json({ collaborators });
     }
     
@@ -1628,6 +1637,7 @@ app.post('/api/projects/join', authenticate, async (req, res) => {
             if (!project.collaborators) {
               project.collaborators = {};
             }
+            const userName = userEmail.split('@')[0];
             project.collaborators[emailKey] = {
               email: userEmail,
               role: 'viewer',
@@ -1635,8 +1645,10 @@ app.post('/api/projects/join', authenticate, async (req, res) => {
               invited_at: new Date().toISOString(),
               joined_at: new Date().toISOString(),
               user_id: req.user.id,
+              user_name: userName,
               status: 'active'
             };
+            console.log(`✅ Mock DB: Added collaborator ${userName} (${userEmail}) with user_id: ${req.user.id}`);
           }
         }
       }
@@ -1682,14 +1694,27 @@ app.post('/api/projects/join', authenticate, async (req, res) => {
       userRole = project.collaborators[emailKey].role;
       console.log(`👤 Found existing collaborator with role: ${userRole}`);
       
-      // If user was invited, mark as active
+      // If user was invited, mark as active and add user_name
       if (project.collaborators[emailKey].status === 'invited') {
+        // Get user info from users collection or use email
+        let userName = userEmail.split('@')[0]; // Fallback
+        try {
+          const userDoc = await getUserRef(req.user.id).get();
+          if (userDoc.exists) {
+            const userData = userDoc.data();
+            userName = userData.displayName || userData.email?.split('@')[0] || userName;
+          }
+        } catch (error) {
+          console.error('Error fetching user info:', error);
+        }
+        
         await db.collection('projects').doc(projectCode).update({
           [`collaborators.${emailKey}.status`]: 'active',
           [`collaborators.${emailKey}.joined_at`]: new Date().toISOString(),
-          [`collaborators.${emailKey}.user_id`]: req.user.id
+          [`collaborators.${emailKey}.user_id`]: req.user.id,
+          [`collaborators.${emailKey}.user_name`]: userName
         });
-        console.log(`✅ Firestore: Activated invited collaborator with role: ${userRole}`);
+        console.log(`✅ Firestore: Activated invited collaborator ${userName} with role: ${userRole}`);
       }
     } else {
       // Check if there's an invitation for this user by email (may have different key format)
@@ -1710,13 +1735,26 @@ app.post('/api/projects/join', authenticate, async (req, res) => {
             invitedRole = project.collaborators[key].role;
             userRole = invitedRole;
             
+            // Get user info from users collection or use email
+            let userName = userEmail.split('@')[0]; // Fallback
+            try {
+              const userDoc = await getUserRef(req.user.id).get();
+              if (userDoc.exists) {
+                const userData = userDoc.data();
+                userName = userData.displayName || userData.email?.split('@')[0] || userName;
+              }
+            } catch (error) {
+              console.error('Error fetching user info:', error);
+            }
+            
             // Activate the invitation
             await db.collection('projects').doc(projectCode).update({
               [`collaborators.${key}.status`]: 'active',
               [`collaborators.${key}.joined_at`]: new Date().toISOString(),
-              [`collaborators.${key}.user_id`]: req.user.id
+              [`collaborators.${key}.user_id`]: req.user.id,
+              [`collaborators.${key}.user_name`]: userName
             });
-            console.log(`✅ Firestore: Activated invited user ${userEmail} with role: ${invitedRole} (key: ${key})`);
+            console.log(`✅ Firestore: Activated invited user ${userName} (${userEmail}) with role: ${invitedRole} (key: ${key})`);
             break;
           }
         }
@@ -1725,6 +1763,19 @@ app.post('/api/projects/join', authenticate, async (req, res) => {
       if (!foundInvitation) {
         // Add as viewer if not explicitly invited (sharing link scenario)
         console.log(`➕ Firestore: Adding new collaborator as viewer (no invitation found)`);
+        
+        // Get user info from users collection or use email
+        let userName = userEmail.split('@')[0]; // Fallback
+        try {
+          const userDoc = await getUserRef(req.user.id).get();
+          if (userDoc.exists) {
+            const userData = userDoc.data();
+            userName = userData.displayName || userData.email?.split('@')[0] || userName;
+          }
+        } catch (error) {
+          console.error('Error fetching user info:', error);
+        }
+        
         const collaboratorData = {
           email: userEmail,
           role: 'viewer',
@@ -1732,12 +1783,15 @@ app.post('/api/projects/join', authenticate, async (req, res) => {
           invited_at: new Date().toISOString(),
           joined_at: new Date().toISOString(),
           user_id: req.user.id,
+          user_name: userName,
           status: 'active'
         };
 
         await db.collection('projects').doc(projectCode).update({
           [`collaborators.${emailKey}`]: collaboratorData
         });
+        
+        console.log(`✅ Firestore: Added collaborator ${userName} (${userEmail}) with user_id: ${req.user.id}`);
       }
     }
     

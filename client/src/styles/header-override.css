@@ -1,0 +1,146 @@
+/* Force header compacting overrides */
+.figma-header.compact-header {
+  height: 40px !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
+  padding: 0 16px !important;
+}
+
+.figma-header.compact-header .project-title {
+  font-size: 16px !important;
+}
+
+.figma-header.compact-header .project-selector-button {
+  background: none !important;
+  border: none !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s !important;
+}
+
+.figma-header.compact-header .project-selector-button:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.figma-header.compact-header .project-status {
+  font-size: 13px !important;
+}
+
+.figma-header.compact-header .status-indicator {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+.figma-header.compact-header .header-actions {
+  gap: 8px !important;
+}
+
+.figma-header.compact-header .header-actions button {
+  padding: 6px !important;
+}
+
+.figma-header.compact-header .user-avatar {
+  width: 28px !important;
+  height: 28px !important;
+  font-size: 11px !important;
+}
+
+.figma-header.compact-header .user-avatars {
+  gap: 4px !important;
+}
+
+/* Also target the general class for backup */
+.figma-header {
+  height: 40px !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
+  padding: 0 16px !important;
+}
+
+.figma-header .project-title {
+  font-size: 16px !important;
+}
+
+.figma-header .project-selector-button {
+  background: none !important;
+  border: none !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  max-width: 300px !important;
+  min-width: 120px !important;
+  justify-content: flex-start !important;
+}
+
+.figma-header .project-selector-button:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="dark"] .figma-header .project-selector-button:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.figma-header .project-status {
+  font-size: 13px !important;
+}
+
+.figma-header .status-indicator {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+.figma-header .header-actions {
+  gap: 8px !important;
+}
+
+.figma-header .header-actions button {
+  padding: 6px !important;
+}
+
+.figma-header .user-avatar {
+  width: 28px !important;
+  height: 28px !important;
+  font-size: 11px !important;
+}
+
+.figma-header .user-avatars {
+  gap: 4px !important;
+}
+
+/* Ensure proper header layout */
+.figma-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.figma-header .project-info {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  min-width: 0 !important;
+}
+
+.figma-header .header-actions {
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Logo container styling */
+.figma-header .logo-container {
+  flex-shrink: 0 !important;
+}

@@ -57,12 +57,5 @@
       host: '0.0.0.0', // Bind to all network interfaces
       port: 3000,
       open: true,
-      proxy: {
-        '/api': {
-          target: 'http://192.168.1.10:3002', // Use network IP to match frontend
-          changeOrigin: true,
-          secure: false,
-        }
-      }
     },
   });

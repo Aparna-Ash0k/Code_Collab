@@ -1,0 +1,80 @@
+/* Room Button Styles */
+.room-button {
+  background: var(--vscode-button-background, #007acc);
+  color: var(--vscode-button-foreground, #ffffff);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.room-button:hover:not(:disabled) {
+  background: var(--vscode-button-hoverBackground, #005a9e);
+  transform: translateY(-1px);
+}
+
+.room-button:active {
+  transform: translateY(0);
+}
+
+.room-button.disabled {
+  background: var(--vscode-button-secondaryBackground, #5a5a5a);
+  color: var(--vscode-button-secondaryForeground, #cccccc);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.room-button.connected {
+  background: var(--vscode-charts-green, #4caf50);
+  animation: pulse 2s infinite;
+}
+
+.room-button.connected:hover {
+  background: var(--vscode-charts-green, #45a049);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(76, 175, 80, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+  }
+}
+
+.connection-indicator {
+  color: #ffffff;
+  font-size: 8px;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0.3;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .room-button {
+    padding: 6px 12px;
+    font-size: 12px;
+    max-width: 150px;
+  }
+}

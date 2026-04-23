@@ -1,0 +1,218 @@
+.role-indicator {
+  position: relative;
+  display: inline-block;
+}
+
+.role-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+/* Solo mode styling */
+.role-indicator.solo .role-badge {
+  background: var(--vscode-badge-background);
+  color: var(--vscode-badge-foreground);
+}
+
+.role-indicator.solo .role-badge:hover {
+  background: var(--vscode-button-hoverBackground);
+}
+
+/* Owner collaboration styling */
+.role-indicator.owner-collab .role-badge {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #2d2d2d;
+  border-color: #ffd700;
+}
+
+.role-indicator.owner-collab .role-badge:hover {
+  background: linear-gradient(135deg, #ffed4e, #ffd700);
+  box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+}
+
+/* Editor collaboration styling */
+.role-indicator.editor-collab .role-badge {
+  background: linear-gradient(135deg, #4CAF50, #66BB6A);
+  color: white;
+  border-color: #4CAF50;
+}
+
+.role-indicator.editor-collab .role-badge:hover {
+  background: linear-gradient(135deg, #66BB6A, #4CAF50);
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+}
+
+/* Viewer collaboration styling */
+.role-indicator.viewer-collab .role-badge {
+  background: linear-gradient(135deg, #2196F3, #42A5F5);
+  color: white;
+  border-color: #2196F3;
+}
+
+.role-indicator.viewer-collab .role-badge:hover {
+  background: linear-gradient(135deg, #42A5F5, #2196F3);
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+}
+
+.role-icon {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.role-text {
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Tooltip styling */
+.role-tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--vscode-tooltip-background);
+  color: var(--vscode-tooltip-foreground);
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  min-width: 200px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  border: 1px solid var(--vscode-tooltip-border, transparent);
+}
+
+.role-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid var(--vscode-tooltip-background);
+}
+
+.role-indicator:hover .role-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.role-title {
+  color: var(--vscode-tooltip-foreground);
+}
+
+.permissions-text {
+  color: var(--vscode-descriptionForeground);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.collaboration-info {
+  border-top: 1px solid var(--vscode-tooltip-border, rgba(255, 255, 255, 0.1));
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+.session-info {
+  font-family: var(--vscode-editor-font-family, monospace);
+  font-size: 10px;
+  color: var(--vscode-descriptionForeground);
+  margin-bottom: 4px;
+}
+
+.collaborators-count {
+  font-size: 11px;
+  color: var(--vscode-descriptionForeground);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .role-tooltip {
+    min-width: 180px;
+    left: auto;
+    right: 0;
+    transform: none;
+  }
+  
+  .role-tooltip::before {
+    left: auto;
+    right: 20px;
+    transform: none;
+  }
+}
+
+/* Animation for role changes */
+.role-indicator .role-badge {
+  animation: roleChange 0.3s ease-out;
+}
+
+@keyframes roleChange {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Accessibility improvements */
+.role-indicator:focus-within .role-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.role-badge:focus {
+  outline: 2px solid var(--vscode-focusBorder);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .role-badge {
+    border-width: 2px;
+  }
+  
+  .role-indicator.owner-collab .role-badge {
+    background: #ffff00;
+    color: #000000;
+    border-color: #000000;
+  }
+  
+  .role-indicator.editor-collab .role-badge {
+    background: #00ff00;
+    color: #000000;
+    border-color: #000000;
+  }
+  
+  .role-indicator.viewer-collab .role-badge {
+    background: #0080ff;
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+}

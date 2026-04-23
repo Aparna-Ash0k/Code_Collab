@@ -1,0 +1,183 @@
+/* File Activity Indicator Styles */
+.file-activity-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.file-editing-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-activity-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+}
+
+.file-activity-tooltip {
+  background: var(--vscode-panel-background);
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 4px;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+/* Live Cursors in Monaco Editor */
+.monaco-editor .live-cursor {
+  position: relative;
+  z-index: 1000;
+}
+
+.monaco-editor .live-cursor-label {
+  position: absolute;
+  top: -20px;
+  left: -2px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+  z-index: 1001;
+  pointer-events: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.monaco-editor .live-selection {
+  border-radius: 2px;
+  opacity: 0.3;
+}
+
+/* Collaboration notifications */
+.collaboration-notification {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: var(--vscode-panel-background);
+  border: 1px solid var(--vscode-accent-background);
+  border-radius: 4px;
+  margin: 8px;
+}
+
+.collaboration-notification .user-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+}
+
+.collaboration-notification .notification-content {
+  flex: 1;
+  color: var(--vscode-foreground);
+}
+
+.collaboration-notification .notification-title {
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.collaboration-notification .notification-message {
+  font-size: 12px;
+  color: var(--vscode-descriptionForeground);
+}
+
+/* Live cursors panel */
+.live-cursors-panel .cursor-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.live-cursors-panel .cursor-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.live-cursors-panel .cursor-item:hover {
+  background: var(--vscode-list-hoverBackground);
+}
+
+.live-cursors-panel .cursor-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.live-cursors-panel .cursor-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.live-cursors-panel .cursor-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--vscode-foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.live-cursors-panel .cursor-file {
+  font-size: 11px;
+  color: var(--vscode-descriptionForeground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.live-cursors-panel .cursor-position {
+  font-size: 10px;
+  color: var(--vscode-descriptionForeground);
+  background: var(--vscode-badge-background);
+  padding: 2px 4px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+/* Animation for pulse effect */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .file-activity-indicator {
+    scale: 0.8;
+  }
+  
+  .live-cursors-panel .cursor-item {
+    padding: 6px;
+  }
+  
+  .collaboration-notification {
+    margin: 4px;
+    padding: 8px;
+  }
+}

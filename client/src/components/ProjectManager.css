@@ -1,0 +1,560 @@
+.project-manager-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(2px);
+}
+
+.project-manager {
+  background: var(--vscode-editor-background);
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.project-manager-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--vscode-panel-border);
+  background: var(--vscode-titleBar-activeBackground);
+}
+
+.project-manager-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--vscode-titleBar-activeForeground);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--vscode-titleBar-activeForeground);
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.close-btn:hover {
+  background: var(--vscode-toolbar-hoverBackground);
+}
+
+.project-manager-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--vscode-panel-border);
+  background: var(--vscode-tab-inactiveBackground);
+}
+
+.tab {
+  flex: 1;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--vscode-tab-inactiveForeground);
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.tab:hover:not(:disabled) {
+  background: var(--vscode-tab-hoverBackground);
+  color: var(--vscode-tab-activeForeground);
+}
+
+.tab.active {
+  background: var(--vscode-tab-activeBackground);
+  color: var(--vscode-tab-activeForeground);
+  border-bottom-color: var(--vscode-tab-activeBorder);
+}
+
+.tab:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.project-manager-content {
+  padding: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* Overview Tab */
+.overview-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.current-project-info h3,
+.projects-summary h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--vscode-foreground);
+}
+
+.project-details {
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 6px;
+  padding: 16px;
+  background: var(--vscode-input-background);
+}
+
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.project-icon {
+  font-size: 24px;
+}
+
+.project-header h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.project-header p {
+  margin: 4px 0 0 0;
+  color: var(--vscode-descriptionForeground);
+  font-size: 13px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.stat {
+  text-align: center;
+  padding: 12px;
+  background: var(--vscode-editor-background);
+  border-radius: 4px;
+  border: 1px solid var(--vscode-panel-border);
+}
+
+.stat-value {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--vscode-foreground);
+}
+
+.stat-label {
+  display: block;
+  font-size: 11px;
+  color: var(--vscode-descriptionForeground);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.project-meta {
+  border-top: 1px solid var(--vscode-panel-border);
+  padding-top: 12px;
+  font-size: 13px;
+}
+
+.project-meta p {
+  margin: 4px 0;
+  color: var(--vscode-descriptionForeground);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.project-card {
+  padding: 12px;
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 6px;
+  background: var(--vscode-input-background);
+  transition: all 0.2s ease;
+}
+
+.project-card:hover {
+  background: var(--vscode-list-hoverBackground);
+  border-color: var(--vscode-focusBorder);
+}
+
+.project-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.project-card h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.project-template {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  color: var(--vscode-descriptionForeground);
+}
+
+.project-stats-mini {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--vscode-descriptionForeground);
+}
+
+/* Create Tab */
+.create-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.create-project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vscode-foreground);
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px 12px;
+  background: var(--vscode-input-background);
+  color: var(--vscode-input-foreground);
+  border: 1px solid var(--vscode-input-border);
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--vscode-focusBorder);
+}
+
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.template-option {
+  padding: 12px;
+  border: 2px solid var(--vscode-panel-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--vscode-input-background);
+}
+
+.template-option:hover {
+  border-color: var(--vscode-focusBorder);
+  background: var(--vscode-list-hoverBackground);
+}
+
+.template-option.selected {
+  border-color: var(--vscode-button-background);
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+}
+
+.template-option h4 {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.template-option p {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.create-btn,
+.import-btn {
+  padding: 10px 20px;
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.create-btn:hover:not(:disabled),
+.import-btn:hover {
+  background: var(--vscode-button-hoverBackground);
+}
+
+.create-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.import-section {
+  border-top: 1px solid var(--vscode-panel-border);
+  padding-top: 16px;
+}
+
+.import-section h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.import-section p {
+  margin: 0 0 12px 0;
+  color: var(--vscode-descriptionForeground);
+  font-size: 13px;
+}
+
+/* Manage Tab */
+.manage-tab h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.project-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 6px;
+  background: var(--vscode-input-background);
+  transition: background 0.2s ease;
+}
+
+.project-item:hover {
+  background: var(--vscode-list-hoverBackground);
+}
+
+.project-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.project-info h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.project-info p {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: var(--vscode-descriptionForeground);
+}
+
+.project-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.project-actions button {
+  padding: 6px 8px;
+  background: none;
+  border: 1px solid var(--vscode-button-border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.project-actions button:hover:not(:disabled) {
+  background: var(--vscode-button-hoverBackground);
+}
+
+.project-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background: var(--vscode-errorBackground);
+  border-color: var(--vscode-errorBorder);
+  color: var(--vscode-errorForeground);
+}
+
+.rename-form {
+  display: inline;
+}
+
+.rename-form input {
+  background: var(--vscode-input-background);
+  color: var(--vscode-input-foreground);
+  border: 1px solid var(--vscode-focusBorder);
+  border-radius: 2px;
+  padding: 2px 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Share Tab */
+.share-tab h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.collaboration-active {
+  padding: 16px;
+  background: var(--vscode-input-background);
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 6px;
+}
+
+.collaboration-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.status-icon {
+  font-size: 24px;
+}
+
+.collaboration-status h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--vscode-foreground);
+}
+
+.collaboration-status p {
+  margin: 4px 0 0 0;
+  font-size: 13px;
+  color: var(--vscode-descriptionForeground);
+}
+
+.collaborators-list h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.collaborator-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--vscode-panel-border);
+}
+
+.collaborator-item:last-child {
+  border-bottom: none;
+}
+
+.role-badge {
+  padding: 2px 8px;
+  background: var(--vscode-badge-background);
+  color: var(--vscode-badge-foreground);
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.share-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.share-btn {
+  padding: 12px 24px;
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+  align-self: flex-start;
+}
+
+.share-btn:hover:not(:disabled) {
+  background: var(--vscode-button-hoverBackground);
+}
+
+.share-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .project-manager {
+    width: 95%;
+    max-height: 95vh;
+  }
+  
+  .project-manager-content {
+    padding: 16px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .template-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tab {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+}
